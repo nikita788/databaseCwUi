@@ -1,0 +1,24 @@
+<form id="loginForm" [formGroup]="loginForm">
+	<div class="field">
+		<label>Username</label>
+		<div class="input">
+			<input type="text" formControlName="username"/>
+			<span *ngIf="username.invalid && (username.touched || username.dirty)">Enter Username</span>
+		</div>
+	</div>
+
+	<div class="field">
+		<label>Password</label>
+		<div class="input">
+			<input type="password" formControlName="password"/>
+			<span *ngIf="password.invalid && (password.touched || password.dirty)">Enter Password</span>
+		</div>
+	</div>
+
+	<div class="submit">
+		<button type="button" (click)="login()">Login</button>
+		<span *ngIf="loginFailed">Username or password is incorrect</span>
+	</div>
+
+
+</form>
