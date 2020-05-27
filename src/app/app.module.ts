@@ -16,13 +16,15 @@ import {TabMenuModule} from 'primeng/components/tabmenu/tabmenu';
 import { MastersComponent } from './tables/masters/masters.component';
 import { MainComponent } from './main/main.component';
 import {TabViewModule} from 'primeng/components/tabview/tabview';
+import { ServicesComponent } from './tables/services/services.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		CarComponent,
 		MastersComponent,
-		MainComponent
+		MainComponent,
+		ServicesComponent
 	],
 	imports: [
 		BrowserModule,
