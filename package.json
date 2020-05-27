@@ -4,12 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --eval-source-map --plugin ~build-customization-plugin.js --deploy-url /notification-center/",
-    "build_prod": "ng build --prod --deploy-url /delegate/notification-center/",
+    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "sonar": "sonar-scanner"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {

@@ -1,0 +1,64 @@
+<menu></menu>
+<p-table *ngIf="cars?.length > 0" [columns]="cols" [value]="cars" selectionMode="single" [(selection)]="selectedCar" (onRowSelect)="onRowSelect($event)">
+	<ng-template pTemplate="header" let-columns>
+		<tr>
+			<th *ngFor="let col of columns">{{col.header}}</th>
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="body" let-rowData>
+		<tr [pSelectableRow]="rowData">
+			<td>{{rowData.number}}</td>
+			<td>{{rowData.mark}}</td>
+			<td>{{rowData.color}}</td>
+			<td>{{rowData.isForeign ? '+' : '-'}}</td>
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="summary" let-rowData>
+		<div style="text-align:left">
+			<button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Add"></button>
+		</div>
+	</ng-template>
+</p-table>
+
+<p-dialog header="Car Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
+	<div class="ui-g ui-fluid" *ngIf="car">
+		<div class="ui-g-12">
+			<div class="ui-g-4">
+				<label for="number">Номер</label>
+			</div>
+			<div class="ui-g-8">
+				<input pInputText id="number" [(ngModel)]="car.number" />
+			</div>
+		</div>
+		<div class="ui-g-12">
+			<div class="ui-g-4">
+				<label for="mark">Марка</label>
+			</div>
+			<div class="ui-g-8">
+				<input pInputText id="mark" [(ngModel)]="car.mark" />
+			</div>
+		</div>
+		<div class="ui-g-12">
+			<div class="ui-g-4">
+				<label for="color">Цвет</label>
+			</div>
+			<div class="ui-g-8">
+				<input pInputText id="color" [(ngModel)]="car.color" />
+			</div>
+		</div>
+		<div class="ui-g-12">
+			<div class="ui-g-4">
+				<label for="foreign">Зарубежная</label>
+			</div>
+			<div class="ui-g-8">
+				<input pInputText id="foreign" [(ngModel)]="car.isForeign" />
+			</div>
+		</div>
+	</div>
+	<p-footer>
+		<div class="ui-dialog-buttonpane ui-helper-clearfix">
+			<button type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>
+			<button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
+		</div>
+	</p-footer>
+</p-dialog>

@@ -9,6 +9,7 @@
     "experimentalDecorators": true,
     "module": "esnext",
     "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
     "importHelpers": true,
     "target": "es2015",
     "typeRoots": [
@@ -17,10 +18,9 @@
     "lib": [
       "es2018",
       "dom"
-    ]
-  },
-  "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    ],
+    "paths": {
+      "primeng/*": ["node_modules/primeng/*"]
+    }
   }
 }

@@ -5,23 +5,38 @@ import { AppComponent } from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {TableModule} from 'primeng/table';
-import {CarComponent} from './car/car.component';
+import {RestService} from './services/rest.service';
 import {HttpClientModule} from '@angular/common/http';
+import {CarComponent} from './tables/car/car.component';
+import {AppRoutingModule} from './app-routing.module';
+import {DialogModule} from 'primeng/components/dialog/dialog';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ButtonModule} from 'primeng/components/button/button';
+import {TabMenuModule} from 'primeng/components/tabmenu/tabmenu';
+import { MenuComponent } from './menu/menu.component';
+import { MastersComponent } from './tables/masters/masters.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		CarComponent
+		CarComponent,
+		MenuComponent,
+		MastersComponent
 	],
 	imports: [
 		BrowserModule,
+		HttpClientModule,
 		FormsModule,
 		ReactiveFormsModule,
 		RouterModule.forRoot([]),
 		TableModule,
-		HttpClientModule
+		AppRoutingModule,
+		DialogModule,
+		BrowserAnimationsModule,
+		ButtonModule,
+		TabMenuModule
 	],
-	providers: [],
+	providers: [RestService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
