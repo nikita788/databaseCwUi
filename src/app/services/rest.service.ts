@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {CarDto} from '../dto/car-dto';
 import {MasterDto} from '../dto/master-dto';
+import {ServiceDto} from '../dto/service-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,10 @@ export class RestService {
   constructor(private httpClient: HttpClient) { }
 
   private REST_URL = 'http://localhost:8080';
-  private CARS_TABLE = '/cars';
-  private MASTERS_TABLE = '/masters';
-  private SERVICES_TABLE = '/services';
-  private WORKS_TABLE = '/works';
+  public CARS_TABLE = '/cars';
+  public MASTERS_TABLE = '/masters';
+  public SERVICES_TABLE = '/services';
+  public WORKS_TABLE = '/works';
 
   //Methods for cars
 
@@ -55,5 +56,19 @@ export class RestService {
 
   //Methods for services
 
+  public getServices(): Observable<Array<ServiceDto>> {
+    return this.httpClient.get<Array<ServiceDto>>(this.REST_URL + this.SERVICES_TABLE);
+  }
 
+  public addService(service: ServiceDto): Observable<ServiceDto> {
+    return this.httpClient.post<ServiceDto>(this.REST_URL + this.SERVICES_TABLE, service);
+  }
+
+  public updateService(service: ServiceDto): Observable<ServiceDto> {
+    return this.httpClient.put<ServiceDto>(this.REST_URL + this.SERVICES_TABLE + '/' + service.id, service);
+  }
+
+  public deleteService(service: ServiceDto): Observable<any> {
+    return this.httpClient.delete(this.REST_URL + this.SERVICES_TABLE + '/' + service.id);
+  }
 }

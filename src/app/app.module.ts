@@ -17,6 +17,7 @@ import { MastersComponent } from './tables/masters/masters.component';
 import { MainComponent } from './main/main.component';
 import {TabViewModule} from 'primeng/components/tabview/tabview';
 import { ServicesComponent } from './tables/services/services.component';
+import { WorksComponent } from './tables/works/works.component';
 
 @NgModule({
 	declarations: [
@@ -24,7 +25,8 @@ import { ServicesComponent } from './tables/services/services.component';
 		CarComponent,
 		MastersComponent,
 		MainComponent,
-		ServicesComponent
+		ServicesComponent,
+		WorksComponent
 	],
 	imports: [
 		BrowserModule,
