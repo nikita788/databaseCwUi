@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {CarDto} from '../dto/car-dto';
 import {MasterDto} from '../dto/master-dto';
 import {ServiceDto} from '../dto/service-dto';
+import {WorkDto} from '../dto/work-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class RestService {
   private REST_URL = 'http://localhost:8080';
   public CARS_TABLE = '/cars';
   public MASTERS_TABLE = '/masters';
-  public SERVICES_TABLE = '/services';
+  public SERVICES_TABLE = '/maintenance';
   public WORKS_TABLE = '/works';
 
   //Methods for cars
@@ -70,5 +71,23 @@ export class RestService {
 
   public deleteService(service: ServiceDto): Observable<any> {
     return this.httpClient.delete(this.REST_URL + this.SERVICES_TABLE + '/' + service.id);
+  }
+
+  //Methods for works
+
+  public getWorks(): Observable<Array<WorkDto>> {
+    return this.httpClient.get<Array<WorkDto>>(this.REST_URL + this.WORKS_TABLE);
+  }
+
+  public addWork(work: WorkDto): Observable<WorkDto> {
+    return this.httpClient.post<WorkDto>(this.REST_URL + this.WORKS_TABLE, work);
+  }
+
+  public updateWork(work: WorkDto): Observable<WorkDto> {
+    return this.httpClient.put<WorkDto>(this.REST_URL + this.WORKS_TABLE + '/' + work.id, work);
+  }
+
+  public deleteWork(work: WorkDto): Observable<any> {
+    return this.httpClient.delete(this.REST_URL + this.WORKS_TABLE + '/' + work.id);
   }
 }
