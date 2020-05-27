@@ -20,6 +20,7 @@ import { ServicesComponent } from './tables/services/services.component';
 import { WorksComponent } from './tables/works/works.component';
 import {DropdownModule} from 'primeng/components/dropdown/dropdown';
 import {MessagesModule} from 'primeng/components/messages/messages';
+import {LoginComponent} from './login/login.component';
 
 @NgModule({
 	declarations: [
@@ -28,7 +29,8 @@ import {MessagesModule} from 'primeng/components/messages/messages';
 		MastersComponent,
 		MainComponent,
 		ServicesComponent,
-		WorksComponent
+		WorksComponent,
+		LoginComponent
 	],
 	imports: [
 		BrowserModule,

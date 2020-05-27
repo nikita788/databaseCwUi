@@ -5,9 +5,11 @@ import {MastersComponent} from './tables/masters/masters.component';
 import {MainComponent} from './main/main.component';
 import {ServicesComponent} from './tables/services/services.component';
 import {WorksComponent} from './tables/works/works.component';
+import {AuthGuardService} from './services/auth-guard.service';
+import {LoginComponent} from './login/login.component';
 
 const childrenRoutes: Routes = [
-	{ path: '', redirectTo: 'cars', pathMatch: 'full' },
+	{ path: 'main', redirectTo: 'cars', pathMatch: 'full' },
 	{ path: 'cars',  component: CarComponent },
 	{ path: 'masters',  component: MastersComponent},
 	{ path: 'services',  component: ServicesComponent},
@@ -15,7 +17,8 @@ const childrenRoutes: Routes = [
 ];
 
 const routes: Routes = [
-	{ path: '',  component: MainComponent, children: childrenRoutes }
+	{ path: 'main',  component: MainComponent, children: childrenRoutes, canActivate: [AuthGuardService] },
+	{ path: '',  component: LoginComponent}
 ];
 
 @NgModule({

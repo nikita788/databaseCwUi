@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../services/authentication.service';
+import {UserDto} from '../dto/user-dto';
 
 @Component({
 	selector: 'app-login',
@@ -15,6 +16,8 @@ export class LoginComponent implements OnInit {
 
 	public loginForm: FormGroup;
 	public loginFailed: boolean;
+
+	public loginDto: UserDto;
 
 	ngOnInit() {
 		this.createForm();
@@ -43,11 +46,15 @@ export class LoginComponent implements OnInit {
 		if (this.form.invalid) {
 			return;
 		}
+		this.loginDto = new UserDto();
+		this.loginDto.username = this.username.value;
+		this.loginDto.password = this.password.value;
 
-		this.authenticationService.login(this.username.value, this.password.value).subscribe(data => {
+		this.authenticationService.login(this.loginDto).subscribe(data => {
 			this.loginFailed = false;
-			this.router.navigate(['/home']);
+			this.router.navigate(['/main']);
 		}, (error) => {
+			console.log(error);
 			this.loginFailed = true;
 		});
 	}

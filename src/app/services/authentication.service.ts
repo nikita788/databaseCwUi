@@ -9,14 +9,14 @@ import {UserDto} from '../dto/user-dto';
 })
 export class AuthenticationService {
 
-	private currentUserSubject: BehaviorSubject<UserDto>;
+	private currentUserSubject: BehaviorSubject<string> = new BehaviorSubject("a");
 	private readonly storageUserKey = 'CURRENT_USER';
 
 	constructor(private httpClient: HttpClient) {
 
 	}
 
-	public get currentUser(): UserDto {
+	public get currentUser(): string {
 		if (this.currentUserSubject) {
 			return this.currentUserSubject.value;
 		}
@@ -24,8 +24,8 @@ export class AuthenticationService {
 		return null;
 	}
 
-	public login(username: string, password: string): Observable<UserDto> {
-		return this.httpClient.post<UserDto>('', {username, password})
+	public login(userDto: UserDto): Observable<string> {
+		return this.httpClient.post<string>('http://localhost:8080/auth', userDto)
 			.pipe(map((user) => {
 				localStorage.setItem(this.storageUserKey, JSON.stringify(user));
 				this.currentUserSubject.next(user);

@@ -14,10 +14,10 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.items = [
-      {label: 'Cars', icon: '', routerLink:'/cars'},
-      {label: 'Masters', icon: '', routerLink:'/masters'},
-      {label: 'Services', icon: '', routerLink:'/services'},
-      {label: 'Works', icon: '', routerLink:'/works'}
+      {label: 'Cars', icon: '', routerLink:'cars'},
+      {label: 'Masters', icon: '', routerLink:'masters'},
+      {label: 'Services', icon: '', routerLink:'services'},
+      {label: 'Works', icon: '', routerLink:'works'}
     ];
   }
 
