@@ -1,5 +1,10 @@
 
 <p-table *ngIf="works?.length > 0" [columns]="cols" [value]="works" selectionMode="single" [(selection)]="selectedWork" (onRowSelect)="onRowSelect($event)">
+  <ng-template pTemplate="caption">
+    <div style="text-align:right">
+      <button type="button" pButton icon="fa fa-plus" (click)="showDialogToCalcAvg()" label="Overage Cost"></button>
+    </div>
+  </ng-template>
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th *ngFor="let col of columns">{{col.header}}</th>
@@ -7,10 +12,10 @@
   </ng-template>
   <ng-template pTemplate="body" let-rowData>
     <tr [pSelectableRow]="rowData">
-      <td>{{rowData.dateWork}}</td>
+      <td>{{rowData.date}}</td>
       <td>{{rowData.master.name}}</td>
-      <td>{{rowData.car.mark}} + ' ' + {{rowData.car.number}}</td>
-      <td>{{rowData.service.name}}</td>
+      <td>{{rowData.car.mark}} {{rowData.car.number}}</td>
+      <td>{{rowData.maintenance.name}}</td>
     </tr>
   </ng-template>
   <ng-template pTemplate="summary" let-rowData>
@@ -20,38 +25,38 @@
   </ng-template>
 </p-table>
 
-<p-dialog header="Master Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '300px'}">
+<p-dialog *ngIf="newWork" header="Work Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '500px'}">
   <div class="ui-g ui-fluid" *ngIf="work">
     <div class="ui-g-12">
       <div class="ui-g-4">
-        <label for="dateWork">Дата работы</label>
+        <label for="date">Дата работы</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="dateWork" [(ngModel)]="work.dateWork" />
+        <input pInputText id="date" [(ngModel)]="work.date" />
       </div>
     </div>
     <div class="ui-g-12">
       <div class="ui-g-4">
-        <label for="master">ФИО мастера</label>
+        <label>ФИО мастера</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="master" [(ngModel)]="work.master" />
+        <p-dropdown [options]="masters" optionLabel="name" [(ngModel)]="selectedMaster" placeholder="Выберите мастера" [virtualScroll]="true" [filter]="false"></p-dropdown>
       </div>
     </div>
     <div class="ui-g-12">
       <div class="ui-g-4">
-        <label for="car">Марка машины и ее госномер</label>
+        <label>Марка машины и ее госномер</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="car" [(ngModel)]="work.car" />
+        <p-dropdown [options]="cars" optionLabel="mark"[(ngModel)]="selectedCar" placeholder="Выберите машину" [virtualScroll]="true" [itemSize]="31" [filter]="false"></p-dropdown>
       </div>
     </div>
     <div class="ui-g-12">
       <div class="ui-g-4">
-        <label for="service">Наименование услуги</label>
+        <label>Наименование услуги</label>
       </div>
       <div class="ui-g-8">
-        <input pInputText id="service" [(ngModel)]="work.service" />
+        <p-dropdown [options]="services" optionLabel="name" [(ngModel)]="selectedService" placeholder="Выберите услугу" [virtualScroll]="true" [itemSize]="31" [filter]="false"></p-dropdown>
       </div>
     </div>
   </div>
@@ -59,6 +64,35 @@
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
       <button *ngIf="!newWork" type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>
       <button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
+    </div>
+  </p-footer>
+</p-dialog>
+
+<p-dialog header="Calculate Average Services Cost" [(visible)]="displayCalcAvg" [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '500px'}">
+  <div class="ui-g ui-fluid" *ngIf="work">
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="dateStart">Дата от</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="dateStart" [(ngModel)]="calcAvgDto.dateStart" />
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="dateEnd">Дата до</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="dateEnd" [(ngModel)]="calcAvgDto.dateEnd" />
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <p-messages [(value)]="messages"></p-messages>
+    </div>
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton icon="fa fa-check" (click)="calculate()" label="Calculate"></button>
     </div>
   </p-footer>
 </p-dialog>

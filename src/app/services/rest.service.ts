@@ -4,7 +4,8 @@ import {Observable} from 'rxjs';
 import {CarDto} from '../dto/car-dto';
 import {MasterDto} from '../dto/master-dto';
 import {ServiceDto} from '../dto/service-dto';
-import {WorkDto} from '../dto/work-dto';
+import {WorkDto, WorkDtoCreate} from '../dto/work-dto';
+import {CalcAvgDto} from '../dto/calc-avg-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -79,15 +80,15 @@ export class RestService {
     return this.httpClient.get<Array<WorkDto>>(this.REST_URL + this.WORKS_TABLE);
   }
 
-  public addWork(work: WorkDto): Observable<WorkDto> {
+  public addWork(work: WorkDtoCreate): Observable<WorkDto> {
     return this.httpClient.post<WorkDto>(this.REST_URL + this.WORKS_TABLE, work);
-  }
-
-  public updateWork(work: WorkDto): Observable<WorkDto> {
-    return this.httpClient.put<WorkDto>(this.REST_URL + this.WORKS_TABLE + '/' + work.id, work);
   }
 
   public deleteWork(work: WorkDto): Observable<any> {
     return this.httpClient.delete(this.REST_URL + this.WORKS_TABLE + '/' + work.id);
+  }
+
+  public calcAvgCost(calcAvgDto: CalcAvgDto): Observable<Object> {
+    return this.httpClient.post(this.REST_URL + this.WORKS_TABLE + '/avgCost', calcAvgDto);
   }
 }

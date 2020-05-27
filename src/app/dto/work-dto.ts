@@ -4,8 +4,15 @@ import {ServiceDto} from './service-dto';
 
 export class WorkDto {
 	public id: number;
-	public dateWork: Date;
+	public date: string;
 	public master: MasterDto;
 	public car: CarDto;
-	public service: ServiceDto;
+	public maintenance: ServiceDto;
+}
+
+export class WorkDtoCreate {
+	public masterId: number;
+	public carId: number;
+	public maintenanceId: number;
+	public workDate: string;
 }

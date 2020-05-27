@@ -4,12 +4,14 @@ import {CarComponent} from './tables/car/car.component';
 import {MastersComponent} from './tables/masters/masters.component';
 import {MainComponent} from './main/main.component';
 import {ServicesComponent} from './tables/services/services.component';
+import {WorksComponent} from './tables/works/works.component';
 
 const childrenRoutes: Routes = [
 	{ path: '', redirectTo: 'cars', pathMatch: 'full' },
 	{ path: 'cars',  component: CarComponent },
 	{ path: 'masters',  component: MastersComponent},
-	{ path: 'services',  component: ServicesComponent}
+	{ path: 'services',  component: ServicesComponent},
+	{ path: 'works',  component: WorksComponent}
 ];
 
 const routes: Routes = [

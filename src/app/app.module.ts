@@ -18,6 +18,8 @@ import { MainComponent } from './main/main.component';
 import {TabViewModule} from 'primeng/components/tabview/tabview';
 import { ServicesComponent } from './tables/services/services.component';
 import { WorksComponent } from './tables/works/works.component';
+import {DropdownModule} from 'primeng/components/dropdown/dropdown';
+import {MessagesModule} from 'primeng/components/messages/messages';
 
 @NgModule({
 	declarations: [
@@ -40,7 +42,9 @@ import { WorksComponent } from './tables/works/works.component';
 		BrowserAnimationsModule,
 		ButtonModule,
 		TabMenuModule,
-		TabViewModule
+		TabViewModule,
+		DropdownModule,
+		MessagesModule
 	],
 	providers: [RestService],
 	bootstrap: [AppComponent]
