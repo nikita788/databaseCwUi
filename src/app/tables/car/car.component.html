@@ -1,4 +1,3 @@
-<menu></menu>
 <p-table *ngIf="cars?.length > 0" [columns]="cols" [value]="cars" selectionMode="single" [(selection)]="selectedCar" (onRowSelect)="onRowSelect($event)">
 	<ng-template pTemplate="header" let-columns>
 		<tr>
@@ -10,7 +9,7 @@
 			<td>{{rowData.number}}</td>
 			<td>{{rowData.mark}}</td>
 			<td>{{rowData.color}}</td>
-			<td>{{rowData.isForeign ? '+' : '-'}}</td>
+			<td>{{rowData.foreign ? '+' : '-'}}</td>
 		</tr>
 	</ng-template>
 	<ng-template pTemplate="summary" let-rowData>
@@ -57,7 +56,7 @@
 	</div>
 	<p-footer>
 		<div class="ui-dialog-buttonpane ui-helper-clearfix">
-			<button type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>
+			<button *ngIf="!newCar" type="button" pButton icon="fa fa-close" (click)="delete()" label="Delete"></button>
 			<button type="button" pButton icon="fa fa-check" (click)="save()" label="Save"></button>
 		</div>
 	</p-footer>

@@ -13,15 +13,16 @@ import {DialogModule} from 'primeng/components/dialog/dialog';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ButtonModule} from 'primeng/components/button/button';
 import {TabMenuModule} from 'primeng/components/tabmenu/tabmenu';
-import { MenuComponent } from './menu/menu.component';
 import { MastersComponent } from './tables/masters/masters.component';
+import { MainComponent } from './main/main.component';
+import {TabViewModule} from 'primeng/components/tabview/tabview';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		CarComponent,
-		MenuComponent,
-		MastersComponent
+		MastersComponent,
+		MainComponent
 	],
 	imports: [
 		BrowserModule,
@@ -34,7 +35,8 @@ import { MastersComponent } from './tables/masters/masters.component';
 		DialogModule,
 		BrowserAnimationsModule,
 		ButtonModule,
-		TabMenuModule
+		TabMenuModule,
+		TabViewModule
 	],
 	providers: [RestService],
 	bootstrap: [AppComponent]
